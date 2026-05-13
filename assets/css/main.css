@@ -457,10 +457,12 @@ input:focus, select:focus, textarea:focus {
 }
 .hero__bg {
   /* Background photo layer. Replace assets/img/hero.png (or .jpg/.webp)
-     and adjust the url() if you change the extension. */
+     and adjust the url() if you change the extension.
+     NOTE: url() in CSS resolves relative to the CSS file itself
+     (assets/css/main.css), so we go up one level to reach assets/img/. */
   position: absolute;
   inset: 0;
-  background-image: url('assets/img/hero.png');
+  background-image: url('../img/hero.png');
   background-size: cover;
   background-position: center right;
   z-index: 0;

@@ -23,3 +23,12 @@ build/
 .env
 .env.*
 !.env.example
+
+# Local office files (local-only working documents — do not publish)
+*.docx
+*.xlsx
+*.pptx
+*.doc
+*.xls
+*.ppt
+~$*
