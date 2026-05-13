@@ -10,6 +10,33 @@
 (function () {
   'use strict';
 
+  /* ----- 0. Base prefix detection -----
+     Locally (python -m http.server) the site lives at "/", so REPO_PREFIX is "".
+     On GitHub Pages it lives at "/<repo>/...", so we capture "/<repo>".
+     This lets us keep absolute paths ("/about.html", "/assets/...") in markup
+     while still working under the GitHub Pages sub-path. */
+  const REPO_PREFIX = (() => {
+    const m = location.pathname.match(/^(\/[^./]+)(?=\/)/);
+    return m ? m[1] : '';
+  })();
+
+  function rewriteAbs(path) {
+    if (!path || path.startsWith('//') || path.startsWith('http')) return path;
+    if (!path.startsWith('/')) return path;
+    if (REPO_PREFIX && path.startsWith(REPO_PREFIX + '/')) return path;
+    return REPO_PREFIX + path;
+  }
+
+  function applyPrefix(root) {
+    if (!REPO_PREFIX) return;
+    root.querySelectorAll('a[href^="/"], img[src^="/"]').forEach((el) => {
+      const isImg = el.tagName === 'IMG';
+      const attr = isImg ? 'src' : 'href';
+      const val = el.getAttribute(attr);
+      el.setAttribute(attr, rewriteAbs(val));
+    });
+  }
+
   /* ----- 1. Partial includes (header / footer) ----- */
   async function includePartials() {
     const targets = document.querySelectorAll('[data-include]');
@@ -20,6 +47,7 @@
           const res = await fetch(src);
           if (!res.ok) throw new Error('Failed: ' + src);
           el.innerHTML = await res.text();
+          applyPrefix(el);
         } catch (err) {
           el.innerHTML = '<!-- include failed: ' + src + ' -->';
           console.error(err);
@@ -95,6 +123,7 @@
 
   /* ----- 4. Init ----- */
   document.addEventListener('DOMContentLoaded', async () => {
+    applyPrefix(document.body);
     await includePartials();
     bindHeader();
     bindMobileMenu();
