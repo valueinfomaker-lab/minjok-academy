@@ -789,19 +789,26 @@ input:focus, select:focus, textarea:focus {
 }
 .map-card__map {
   flex: 1;
-  min-height: 320px;
-  background:
-    repeating-linear-gradient(
-      45deg,
-      var(--color-bg-cool) 0 12px,
-      var(--color-bg-soft) 12px 24px
-    );
+  min-height: 360px;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--color-text-mute);
   font-size: var(--fs-sm);
+  background: var(--color-bg-soft);
+  overflow: hidden;
 }
+/* Force the Kakao "지도 퍼가기" widget to fill the responsive parent.
+   The widget hard-codes mapWidth/mapHeight inline, so we override
+   with !important on its container chain. */
+.map-card__map .root_daum_roughmap,
+.map-card__map .root_daum_roughmap .wrap_map {
+  width: 100% !important;
+  height: 100% !important;
+}
+.map-card__map .root_daum_roughmap { min-height: 360px; }
+.map-card__map .root_daum_roughmap .wrap_map { min-height: 320px; }
 .map-card__info {
   padding: var(--sp-5);
   border-top: 1px solid var(--color-border);

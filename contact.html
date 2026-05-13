@@ -149,8 +149,17 @@
         <p class="section-sub">남가좌·북가좌 도보 거리. 대중교통·자가용 모두 편리합니다.</p>
 
         <div class="map-card">
-          <div class="map-card__map" aria-label="지도 — 카카오맵/네이버맵 임베드 위치">
-            [ 지도 임베드 영역 — 카카오맵 / 네이버맵 ]
+          <div class="map-card__map" aria-label="민족 어학원 위치 — 카카오맵">
+            <div id="daumRoughmapContainer1778644390294" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+            <script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+            <script charset="UTF-8">
+              new daum.roughmap.Lander({
+                "timestamp" : "1778644390294",
+                "key" : "nbjqnodgg5w",
+                "mapWidth" : "640",
+                "mapHeight" : "360"
+              }).render();
+            </script>
           </div>
         </div>
 
