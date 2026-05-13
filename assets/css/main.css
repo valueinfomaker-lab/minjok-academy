@@ -462,7 +462,7 @@ input:focus, select:focus, textarea:focus {
      (assets/css/main.css), so we go up one level to reach assets/img/. */
   position: absolute;
   inset: 0;
-  background-image: url('../img/hero.png');
+  background-image: url('../img/hero.webp');
   background-size: cover;
   background-position: center right;
   z-index: 0;
@@ -530,6 +530,10 @@ input:focus, select:focus, textarea:focus {
 @media (max-width: 767px) {
   .hero { min-height: 520px; }
   .hero__sub { font-size: var(--fs-base); }
+  /* Center the slogan / sub / CTA on mobile */
+  .hero__inner { text-align: center; max-width: none; }
+  .hero__sub { margin-left: auto; margin-right: auto; }
+  .hero__actions { justify-content: center; }
 }
 
 /* -----------------------------
