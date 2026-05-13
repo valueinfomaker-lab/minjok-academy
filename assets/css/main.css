@@ -300,6 +300,19 @@ input:focus, select:focus, textarea:focus {
   color: var(--color-primary);
   letter-spacing: -0.02em;
 }
+/* Image-based brand (header). Footer keeps the text variant. */
+.brand--logo {
+  align-items: center;
+  gap: 0;
+}
+.brand--logo img {
+  height: 56px;
+  width: auto;
+  display: block;
+}
+@media (max-width: 767px) {
+  .brand--logo img { height: 44px; }
+}
 .brand__mark {
   display: inline-block;
   width: 28px;
