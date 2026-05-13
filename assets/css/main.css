@@ -456,29 +456,41 @@ input:focus, select:focus, textarea:focus {
   background: linear-gradient(135deg, #06203F 0%, #0B2E5B 50%, #1E4A82 100%);
 }
 .hero__bg {
-  /* Background photo layer.
-     Drop a 16:9 image at  assets/img/hero.jpg (or .webp/.png) and it appears.
-     If the file is missing the gradient above is shown. */
+  /* Background photo layer. Replace assets/img/hero.png (or .jpg/.webp)
+     and adjust the url() if you change the extension. */
   position: absolute;
   inset: 0;
-  background-image: url('assets/img/hero.jpg');
+  background-image: url('assets/img/hero.png');
   background-size: cover;
-  background-position: center;
+  background-position: center right;
   z-index: 0;
 }
 .hero::after {
-  /* Dark gradient overlay for text legibility on top of the photo */
+  /* Horizontal gradient overlay:
+     - left side darker so the slogan stays legible
+     - right side mostly clear so the photo's main subject is visible */
   content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    135deg,
-    rgba(6, 32, 63, 0.88) 0%,
-    rgba(11, 46, 91, 0.72) 45%,
-    rgba(30, 74, 130, 0.55) 100%
+    90deg,
+    rgba(6, 32, 63, 0.92) 0%,
+    rgba(6, 32, 63, 0.78) 30%,
+    rgba(6, 32, 63, 0.35) 65%,
+    rgba(6, 32, 63, 0.10) 100%
   );
   z-index: 1;
   pointer-events: none;
+}
+@media (max-width: 767px) {
+  /* On mobile the text overlaps the whole image, so darken uniformly */
+  .hero::after {
+    background: linear-gradient(
+      180deg,
+      rgba(6, 32, 63, 0.78) 0%,
+      rgba(6, 32, 63, 0.80) 100%
+    );
+  }
 }
 .hero__inner {
   position: relative;
